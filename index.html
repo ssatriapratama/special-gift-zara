@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Love Scrapbook</title>
+    <meta name="description" content="A personal digital scrapbook.">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <button id="musicToggle" class="music-toggle" aria-label="Toggle music">♪ Music</button>
+    <audio id="bgMusic" loop autoplay>
+        <source src="assets/audio/Backstreet Boys - Shape of My Heart.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Wrong PIN Overlay -->
+    <div id="wrongOverlay" class="wrong-overlay hidden">
+        <img src="assets/gambar/tengil.jpeg" class="wrong-sticker" alt="Wrong PIN">
+        <h2 id="wrongMessageText" class="wrong-message-text"></h2>
+    </div>
+
+    <!-- PIN Screen Overlay -->
+    <div id="pinScreen" class="pin-screen">
+        <!-- Main PIN Box -->
+        <div class="pin-container fade-in" id="pinBox">
+
+            <div class="pin-decorations">
+                <span class="flower">🌸</span>
+                <span class="heart">💖</span>
+                <span class="flower">🌸</span>
+            </div>
+            <h2>Secret PIN</h2>
+            <p>Please enter the code to unlock.</p>
+            <div class="pin-display" id="pinDisplay">
+                <span class="pin-dot"></span>
+                <span class="pin-dot"></span>
+                <span class="pin-dot"></span>
+                <span class="pin-dot"></span>
+                <span class="pin-dot"></span>
+                <span class="pin-dot"></span>
+            </div>
+            <div class="pin-keypad">
+                <button class="pin-btn" data-val="1">1</button>
+                <button class="pin-btn" data-val="2">2</button>
+                <button class="pin-btn" data-val="3">3</button>
+                <button class="pin-btn" data-val="4">4</button>
+                <button class="pin-btn" data-val="5">5</button>
+                <button class="pin-btn" data-val="6">6</button>
+                <button class="pin-btn" data-val="7">7</button>
+                <button class="pin-btn" data-val="8">8</button>
+                <button class="pin-btn" data-val="9">9</button>
+                <button class="pin-btn pin-btn-action pin-clear">C</button>
+                <button class="pin-btn" data-val="0">0</button>
+                <button class="pin-btn pin-btn-action pin-del">&larr;</button>
+            </div>
+            <p id="pinMessage" class="pin-message">Type 6 digits</p>
+
+            <!-- Clue Section -->
+            <div class="clue-section hidden" id="clueSection">
+                <span class="clue-toggle" id="clueToggle">Butuh clue ngga?</span>
+                <p class="clue-text hidden" id="clueText"></p>
+            </div>
+        </div>
+
+        <!-- Welcome Animation Box -->
+        <div class="welcome-container hidden" id="welcomeBox">
+            <h1 class="welcome-title">Welcome, <br><span id="welcomeNameDisplay"></span>!</h1>
+            <p>Preparing your special memories...</p>
+        </div>
+
+        <!-- Confetti/Petals Container -->
+        <div id="confettiContainer" class="confetti-container"></div>
+    </div>
+
+    <div class="scroll-container" id="mainContent">
+        <!-- Section 1: Opening -->
+        <section id="opening" class="section opening">
+            <div class="scrapbook-cover fade-in">
+                <img src="assets/gambar/bunga.jpeg" alt="Flower Decoration" class="flower-sticker">
+                <div class="polaroid-wrapper">
+                    <div class="tape tape-top"></div>
+                    <!-- Default placeholder using a data URI or external URL can be put here. I will just use the one from config. -->
+                    <img id="coverPhoto" src="assets/gambar/pink imut.jpeg" alt="Cover Photo">
+                </div>
+                <h1 id="coverTitle">To <span id="partnerNameDisplay"> Siti Fatimatuz Zahra </span></h1>
+                <p id="coverSubtitle">A little collection of memories that mean more than words.</p>
+                <div class="small-heart">❤️</div>
+                <button id="startBtn" class="btn-primary">Open Your Story &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Section 2: Our Story -->
+        <section id="story" class="section hidden">
+            <div class="container">
+                <h2 class="section-title reveal">Where It All Started</h2>
+                <div class="story-content reveal">
+                    <p id="storyText" class="story-text">Everything started from a simple moment...</p>
+                    <div class="polaroid rotated-left">
+                        <div class="tape tape-top"></div>
+                        <img id="storyImage" src="assets/gambar/tengil.jpeg" alt="Our Story">
+                        <div class="polaroid-caption">
+                            <span id="storyDate">[TANGGAL]</span><br>
+                            <span id="storyCaption">[CAPTION]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Timeline -->
+        <section id="timeline" class="section hidden">
+            <div class="container">
+                <h2 class="section-title reveal">The Story About You</h2>
+                <div id="timelineContainer" class="timeline-container">
+                    <!-- Dynamic Timeline Items -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Memory Wall -->
+        <section id="memories" class="section hidden">
+            <div class="container">
+                <h2 class="section-title reveal">Little Moments, Big Memories</h2>
+                <div id="memoryGallery" class="masonry-gallery">
+                    <!-- Dynamic Memories -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Things I Love About You -->
+        <section id="reasons" class="section hidden">
+            <div class="container">
+                <h2 class="section-title reveal">Little Things About You</h2>
+                <div id="reasonsContainer" class="reasons-grid">
+                    <!-- Dynamic Reasons -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Our Favorite Things -->
+        <section id="favorite-things" class="section hidden">
+            <div class="container">
+                <h2 class="section-title reveal">Your Favorite Things</h2>
+                <div id="favoritesContainer" class="favorites-list">
+                    <!-- Dynamic Favorites -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Letter -->
+        <section id="letter" class="section hidden">
+            <div class="container">
+                <h2 class="section-title reveal">A Little Letter For You</h2>
+                <div class="letter-paper reveal">
+                    <div class="tape tape-corner"></div>
+                    <div class="letter-content">
+                        <p id="letterText">[Tulis surat kamu di sini]</p>
+                        <div class="signature">
+                            Salam hangat, <br><span id="yourNameSignature">[NAMA SAYA]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Final Reveal -->
+        <section id="final-reveal" class="section final-section hidden">
+            <div class="container">
+                <div class="final-intro reveal">
+                    <div class="final-envelope-icon">💌</div>
+                    <h2>Sebelum Kamu Pergi...</h2>
+                    <p>Ada satu rahasia kecil yang ingin aku sampaikan padamu ✨</p>
+                    <button id="revealBtn" class="btn-primary final-reveal-btn">Buka Suratnya 💖</button>
+                </div>
+
+                <div id="finalMessage" class="final-message-container display-none">
+                    <div class="final-card-badge">💖</div>
+                    <img src="assets/gambar/bunga.jpeg" class="corner-sticker sticker-top-left" alt="">
+                    <img src="assets/gambar/bunga.jpeg" class="corner-sticker sticker-bottom-right" alt="">
+
+                    <p id="confessionText" class="confession-text">[TULIS KALIMAT CINTA SAYA DI SINI]</p>
+                    <div class="final-footer">
+                        <button id="sendLoveBtn" class="heart-pulse-btn" type="button">❤️ Kirim Cinta</button>
+                        <p class="final-thankyou">Terima kasih Sudah Mau melihat Zara.</p>
+                        <p id="finalDateDisplay" class="final-date">Salam hangat,</p>
+                        <p class="final-signature"><span id="yourNameFinal">Satria Pratama</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Lightbox for images -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+        <span class="close-lightbox" aria-label="Close modal">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" alt="Enlarged memory">
+        <div id="lightboxCaption"></div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
